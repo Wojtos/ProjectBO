@@ -4,7 +4,7 @@ from AntAlgoritm import AntAlgoritm
 from StadiumOrder import StadiumOrder
 from TaskRequirements import TaskRequirements
 
-if __name__ == "__main__":
+def example1():
     time_matrix = np.array([
         [0, 50, 90, 40],
         [50, 0, 100, 30],
@@ -18,6 +18,31 @@ if __name__ == "__main__":
     solution = ant_algoritm.solve()
     if solution is None:
         print('NOT FOUND')
-    else :
+    else:
         solution.print()
     print()
+
+def example2():
+    time_matrix = np.array(
+        [[1000, 2, 2, 4, 3, 1000, 1000, 1000],
+         [2, 1000, 2, 1000, 1000, 1, 1, 1000],
+         [2, 2, 1000, 1000, 2, 1, 1000, 1000],
+         [4, 1000, 1000, 1000, 1000, 2, 1000, 3],
+         [3, 1000, 2, 1000, 1000, 1000, 4, 5],
+         [1000, 1, 1, 2, 1000, 1000, 2, 2],
+         [1000, 1, 1000, 1000, 4, 2, 1000, 2],
+         [1000, 1000, 1000, 3, 5, 2, 2, 1000]]
+    )
+    task_requirements = TaskRequirements(time_matrix, [], [])
+    ant_algoritm = AntAlgoritm(task_requirements)
+    solution = ant_algoritm.solve()
+    if solution is None:
+        print('NOT FOUND')
+    else:
+        solution.print()
+    print()
+
+if __name__ == "__main__":
+    #example1()
+    example2()
+

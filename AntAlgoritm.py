@@ -8,7 +8,7 @@ class AntAlgoritm:
     def __init__(self, task_requirements):
         self.alpha = 1
         self.betha = 1
-        self.iterations_amount = 10
+        self.iterations_amount = 1000
         self.random_factor = 0.01
         self.evaporation = 0.5
         self.Q = 500
