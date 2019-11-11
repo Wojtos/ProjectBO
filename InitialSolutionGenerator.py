@@ -14,20 +14,17 @@ class InitialSolutionGenerator:
         for stadium_order in self.task_requirements.visit_order_constraints:
             self.solution.add(stadium_order)
 
-    def generate(self):
+    def generate(self, current_index):
         if self.solution.ended():
             return self.solution
-        current_index = self.solution.get_current_index()
         free_stadiums_index = self.solution.get_free_stadiums_index()
         free_stadiums_index = self.exclude_skip_order_constraints(current_index, free_stadiums_index)
         random.shuffle(free_stadiums_index)
         for stadium_index in free_stadiums_index:
             stadium_order = StadiumOrder(stadium_index, current_index)
             self.solution.add(stadium_order)
-            # self.solution.print()
-            if self.generate() is not None:
-                return self.solution
-            self.solution.remove(stadium_order)
+            return self.solution
+
         return None
 
     def add_visit_order_constraints(self):

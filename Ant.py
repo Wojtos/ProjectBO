@@ -1,7 +1,19 @@
-class Solution:
+class Ant:
     def __init__(self, size):
         self.size = size
-        self.stadium_orders = [None] * size
+        self.clear()
+
+    def clear(self):
+        self.stadium_orders = [None] * self.size
+
+    def visited(self, index):
+        return self.visited[index]
+
+    def trail_length(self, task_requirements):
+        length = 0
+        for i in range(len(self.trail) - 1):
+            length += task_requirements.get_journey_time(self.trail[i], self.trail[i + 1])
+        return length
 
     def add(self, stadium_order):
         self.stadium_orders[stadium_order.order] = stadium_order
