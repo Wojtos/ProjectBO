@@ -80,7 +80,7 @@ def ekstraklasa_stadiums():
 
     stadium_names = ['WislaKrakw', 'WislaPlock', 'Cracovia', 'Slask', 'Gornik', 'Lech', 'Legia', 'Piast', 'Rakow', 'LKS', 'Zaglebie' , 'Korona', 'Arka', 'Lechia',	'Pogon', 'Jagiellonia']
     visit_order_constraints = [StadiumOrder(2, 0), StadiumOrder(14, 1), StadiumOrder(0, 2)]
-    skip_order_constraints = [StadiumOrder(15, 15)]
+    skip_order_constraints = [StadiumOrder(4, 3)]
     task_requirements = TaskRequirements(distance_matrix, visit_order_constraints, skip_order_constraints)
     ant_algoritm = AntAlgoritm(task_requirements)
     solution = ant_algoritm.solve()

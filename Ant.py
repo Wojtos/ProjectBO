@@ -61,7 +61,7 @@ class Ant:
             self.add(stadium_order)
 
     def exclude_skip_order_constraints(self, current_index):
-        excluded_statium_indexes = list(map(
+        excluded_stadium_indexes = list(map(
             lambda x: x.stadium_index,
             filter(
                 lambda x: x.order == current_index,
@@ -69,7 +69,7 @@ class Ant:
             )
         ))
         return list(filter(
-            lambda x: x not in excluded_statium_indexes,
+            lambda x: x not in excluded_stadium_indexes,
             self.get_free_stadiums_index()
         ))
 

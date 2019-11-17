@@ -23,9 +23,12 @@ class AntAlgoritm:
             self.ants = [Ant(self.task_requirements) for i in range(self.stadiums_amount)]
             for ant in self.ants:
                 ant.generate_random()
-            self.move_ants()
-            self.update_trails()
-            self.update_best(i)
+            try:
+                self.move_ants()
+                self.update_trails()
+                self.update_best(i)
+            except:
+                pass
         return self.best_ant
 
     def move_ants(self):
@@ -49,8 +52,8 @@ class AntAlgoritm:
 
     def calculate_probabilities(self, ant):
         previous_stadium_index = ant.get_current_stadium_index()
-        free_stadiums_index = ant.get_free_stadiums_index()
-        probabilites =  [0] * self.stadiums_amount
+        free_stadiums_index = ant.exclude_skip_order_constraints(ant.get_current_index())
+        probabilites = [0] * self.stadiums_amount
         pheronome = 0.0
 
         for free_index in free_stadiums_index:
@@ -59,7 +62,6 @@ class AntAlgoritm:
             if stadium_index in free_stadiums_index:
                 numerator = self.trails[previous_stadium_index][stadium_index] ** self.alpha * (1.0 / self.task_requirements.get_journey_time(previous_stadium_index, stadium_index)) ** self.betha
                 probabilites[stadium_index] = numerator / pheronome
-
         return probabilites
 
     def cacluate_index(self, probabilites):
@@ -68,8 +70,9 @@ class AntAlgoritm:
         current_sum = 0
         for stadium_index in range(self.stadiums_amount):
             current_sum += probabilites[stadium_index]
-            if current_sum >= random_double:
+            if current_sum > random_double:
                 return stadium_index
+        raise Exception('Bad road!')
 
     def update_trails(self):
         for i in range(self.stadiums_amount):
