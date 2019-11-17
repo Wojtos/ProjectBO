@@ -97,3 +97,17 @@ class Ant:
             self.trail_length()
         ))
 
+    def print_with_names(self, stadiums_names):
+        for index, stadium_order in enumerate(self.stadium_orders):
+            if stadium_order is None:
+                continue
+            print(
+                'Order: {}. stadium index: {}, club: {}'.format(
+                    stadium_order.order,
+                    stadium_order.stadium_index,
+                    stadiums_names[stadium_order.stadium_index]
+                ))
+        print('Total length: {}'.format(
+            self.trail_length()
+        ))
+

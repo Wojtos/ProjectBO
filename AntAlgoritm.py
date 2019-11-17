@@ -7,7 +7,7 @@ from StadiumOrder import StadiumOrder
 class AntAlgoritm:
     def __init__(self, task_requirements):
         self.alpha = 1
-        self.betha = 1
+        self.betha = 5
         self.iterations_amount = 1000
         self.random_factor = 0.01
         self.evaporation = 0.5
@@ -15,6 +15,7 @@ class AntAlgoritm:
         self.task_requirements = task_requirements
         self.stadiums_amount = self.task_requirements.size()
         self.best_ant = None
+        self.best_iteration = 0
 
     def solve(self):
         for i in range(self.iterations_amount):
@@ -24,7 +25,7 @@ class AntAlgoritm:
                 ant.generate_random()
             self.move_ants()
             self.update_trails()
-            self.update_best()
+            self.update_best(i)
         return self.best_ant
 
     def move_ants(self):
@@ -79,10 +80,12 @@ class AntAlgoritm:
             for i in range(self.stadiums_amount - 1):
                 self.trails[ant.get(i).stadium_index][ant.get(i + 1).stadium_index] += contribution
 
-    def update_best(self):
+    def update_best(self, iteration):
         if self.best_ant is None:
             self.best_ant = self.ants[0]
 
         for ant in self.ants:
             if ant.trail_length() < self.best_ant.trail_length():
                 self.best_ant = ant
+                self.best_iteration = iteration
+                print(iteration)
